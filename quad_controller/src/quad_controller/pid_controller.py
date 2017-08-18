@@ -5,7 +5,7 @@
 #
 ##################################################################################
 
-class PID_Controller:
+class PIDController:
     def __init__(self, kp = 0.0, ki = 0.0, kd = 0.0, max_windup = 20,
             start_time = 0, alpha = 1., u_bounds = [float('-inf'), float('inf')]):
         
