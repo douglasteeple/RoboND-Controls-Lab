@@ -1,7 +1,6 @@
 ##################################################################################
-# Your goal is to follow the comments and complete the the tasks asked of you.
-#
-# Good luck designing your proportional integral and derivative controller!
+# 
+# PID Controller, with maximum windup and derivative low-pass filtering.
 #
 ##################################################################################
 
@@ -9,7 +8,7 @@ class PIDController:
     def __init__(self, kp = 0.0, ki = 0.0, kd = 0.0, max_windup = 20,
             start_time = 0, alpha = 1., u_bounds = [float('-inf'), float('inf')]):
         
-        # The PID controller can be initalized with a specific kp value
+        # The PID controller can be initialized with a specific kp value
         # ki value, and kd value
         self.kp_ = float(kp)
         self.ki_ = float(ki)
@@ -21,11 +20,11 @@ class PIDController:
         # Set alpha for derivative filter smoothing factor
         self.alpha = float(alpha) 
         
-        # Setting control effort saturation limits
+        # Set control effort saturation limits
         self.umin = u_bounds[0]
         self.umax = u_bounds[1]
 
-        # Store relevant data
+        # Store initial data
         self.last_timestamp_ = 0.0
         self.set_point_ = 0.0
         self.start_time_ = start_time
@@ -63,7 +62,7 @@ class PIDController:
 
     # Create function to set max_windup_
     def setMaxWindup(self, max_windup):
-        self.max_windup_ = int(max_windup)
+        self.max_windup_ = float(max_windup)
 
     def update(self, measured_value, timestamp):
         delta_time = timestamp - self.last_timestamp_
@@ -120,7 +119,7 @@ class PIDController:
             u = self.umin
         ########################################
     
-        # Here we are storing the control effort history for post control
+        # Store the control effort history for post control
         # observations. 
         self.u_p.append(p)
         self.u_i.append(i)
